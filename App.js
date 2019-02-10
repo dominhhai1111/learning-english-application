@@ -4,6 +4,7 @@
  * @flow
  */
 
+import getAllTopics from './src/api/getTopics';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -21,19 +22,34 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [{'name': 'Chủ đề', 'id': 0}]
+    }
+  }
+
+  componentDidMount() {
+    getAllTopics()
+    .then(topics => {
+      this.setState({list: topics});
+    })
+    .catch(err => console.log(err));
+  }
+
+  topicList = ()  => {
+    return this.state.list.map((topic) => {
+      return (
+        <Text style={styles.welcome} key={topic.id}>
+          {topic.name}
+        </Text>
+      )
+    })
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      this.topicList()
     );
   }
 }

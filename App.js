@@ -10,7 +10,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -40,16 +41,31 @@ export default class App extends Component<Props> {
   topicList = ()  => {
     return this.state.list.map((topic) => {
       return (
-        <Text style={styles.welcome} key={topic.id}>
-          {topic.name}
-        </Text>
+        <View style={styles.topic} key={topic.id}>
+          <View style={styles.topic_image_area}>
+            <Image source={require('./src/img/photograph.jpg')}
+                 style={{
+                    width: 120,
+                    height: 100,
+                    resizeMode: 'contain'
+                 }}>
+          </Image>
+          </View>
+          <View style={styles.topic_title_area}>
+            <Text style={styles.topic_title}>
+              {topic.name}
+            </Text>
+          </View>
+        </View> 
       )
     })
   }
 
   render() {
     return (
-      this.topicList()
+      <View style={styles.list}>
+        {this.topicList()}
+      </View>
     );
   }
 }
@@ -71,4 +87,32 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  list: {
+    flex: 1,
+    backgroundColor: '#faf3e0'
+  },
+  topic: {
+    backgroundColor: '#fcb202',
+    marginBottom: 10,
+    flex: 1,
+    flexDirection: 'row' 
+  },
+  topic_image_area: {
+    width: 120,
+    height: 100,
+    backgroundColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  topic_title_area: {
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
+  topic_title: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    textAlign: 'left',
+    fontWeight: 'bold'
+  } 
 });

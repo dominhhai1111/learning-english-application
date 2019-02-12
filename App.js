@@ -11,7 +11,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  FlatList
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -26,39 +27,50 @@ export default class App extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      list: [{'name': 'Chủ đề', 'id': 0}]
+      list: [{'name': 'Chủ đề', 'id': 0, 'key': 0}]
     }
   }
 
   componentDidMount() {
     getAllTopics()
     .then(topics => {
+      topics.map((topic) => {
+        topic['key'] = topic['id'];
+      });
       this.setState({list: topics});
     })
     .catch(err => console.log(err));
   }
 
   topicList = ()  => {
-    return this.state.list.map((topic) => {
-      return (
-        <View style={styles.topic} key={topic.id}>
-          <View style={styles.topic_image_area}>
-            <Image source={require('./src/img/photograph.jpg')}
-                 style={{
-                    width: 120,
-                    height: 100,
-                    resizeMode: 'contain'
-                 }}>
-          </Image>
-          </View>
-          <View style={styles.topic_title_area}>
-            <Text style={styles.topic_title}>
-              {topic.name}
-            </Text>
-          </View>
-        </View> 
-      )
-    })
+    return (
+      <FlatList
+        data={this.state.list}
+        renderItem={({item}) => this.topic(item)}
+        keyExtractor = { (item, index) => index.toString() }
+      />
+    )
+  }
+
+  topic = (topic) => {
+    return (
+      <View style={styles.topic} key={topic.id}>
+        <View style={styles.topic_image_area}>
+          <Image source={require('./src/img/photograph.jpg')}
+               style={{
+                  width: 120,
+                  height: 100,
+                  resizeMode: 'contain'
+               }}>
+        </Image>
+        </View>
+        <View style={styles.topic_title_area}>
+          <Text style={styles.topic_title}>
+            {topic.name}
+          </Text>
+        </View>
+      </View> 
+    )
   }
 
   render() {

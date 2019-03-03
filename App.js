@@ -1,130 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React from 'react';
+import {Text} from 'react-native';
+import TopicList from './src/screens/TopicList.js';
+import TestList from './src/screens/TestList.js';
+import {createStackNavigator} from 'react-navigation';
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
-import getAllTopics from './src/api/getTopics';
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  FlatList
-} from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+const AppNavigator = createStackNavigator({
+  TopcicList: {screen: TopicList},
+  TestList: {screen: TestList}
 });
 
-type Props = {};
-export default class App extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [{'name': 'Chủ đề', 'id': 0, 'key': 0}]
-    }
-  }
-
-  componentDidMount() {
-    getAllTopics()
-    .then(topics => {
-      topics.map((topic) => {
-        topic['key'] = topic['id'];
-      });
-      this.setState({list: topics});
-    })
-    .catch(err => console.log(err));
-  }
-
-  topicList = ()  => {
-    return (
-      <FlatList
-        data={this.state.list}
-        renderItem={({item}) => this.topic(item)}
-        keyExtractor = { (item, index) => index.toString() }
-      />
-    )
-  }
-
-  topic = (topic) => {
-    return (
-      <View style={styles.topic} key={topic.id}>
-        <View style={styles.topic_image_area}>
-          <Image source={require('./src/img/photograph.jpg')}
-               style={{
-                  width: 120,
-                  height: 100,
-                  resizeMode: 'contain'
-               }}>
-        </Image>
-        </View>
-        <View style={styles.topic_title_area}>
-          <Text style={styles.topic_title}>
-            {topic.name}
-          </Text>
-        </View>
-      </View> 
-    )
-  }
-
-  render() {
-    return (
-      <View style={styles.list}>
-        {this.topicList()}
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  list: {
-    flex: 1,
-    backgroundColor: '#faf3e0'
-  },
-  topic: {
-    backgroundColor: '#fcb202',
-    marginBottom: 10,
-    flex: 1,
-    flexDirection: 'row' 
-  },
-  topic_image_area: {
-    width: 120,
-    height: 100,
-    backgroundColor: '#FFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  topic_title_area: {
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
-  topic_title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    textAlign: 'left',
-    fontWeight: 'bold'
-  } 
-});
+export default AppNavigator;

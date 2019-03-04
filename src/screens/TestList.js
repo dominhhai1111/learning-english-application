@@ -11,6 +11,13 @@ import {
 
 type Props = {};
 export default class App extends Component<Props> {
+  static navigationOptions = {
+    title: 'Practice',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +45,22 @@ export default class App extends Component<Props> {
 
   viewTest = (item) => {
     return (
-      <Text>{item.name}</Text>
+      <View style={styles.test} key={item.id}>
+        <View style={styles.test_image_area}>
+          <Image source={require('../img/photograph.jpg')}
+               style={{
+                  width: 120,
+                  height: 100,
+                  resizeMode: 'contain'
+               }}>
+        </Image>
+        </View>
+        <View style={styles.test_title_area}>
+          <Text style={styles.test_title}>
+            {item.name}
+          </Text>
+        </View>
+      </View> 
     )
   }
 
@@ -58,4 +80,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  test: {
+    backgroundColor: '#fcb202',
+    marginBottom: 10,
+    flex: 1,
+    flexDirection: 'row' 
+  },
+  test_image_area: {
+    width: 120,
+    height: 100,
+    backgroundColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  test_title_area: {
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
+  test_title: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    textAlign: 'left',
+    fontWeight: 'bold'
+  } 
 });

@@ -18,6 +18,12 @@ import {
 
 type Props = {};
 export default class TopicList extends Component<Props> {
+  static navigationOptions = {
+    title: 'Topics',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+  };
 
   constructor(props) {
     super(props);

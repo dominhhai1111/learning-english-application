@@ -21,7 +21,7 @@ export default class App extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      list: [{'name': 'Test 1', 'id': 0, 'key': 0}]
+      list: [{'name': 'Test 1', 'id': 0, 'key': 0, 'content': 'Introduce about the test', 'score': '9/10', 'testTime': 10, 'time': '10:20', 'date': '01/01/2019'}]
     }
   }
 
@@ -59,6 +59,18 @@ export default class App extends Component<Props> {
           <Text style={styles.test_title}>
             {item.name}
           </Text>
+          <Text style={styles.test_title}>
+            {item.content}
+          </Text>
+          <View style={styles.score_area}>
+              <Text style={styles.score_title}>
+                Score:
+                </Text>
+            
+              <Text style={styles.score}>
+                {item.score}
+             </Text>
+          </View>
         </View>
       </View> 
     )
@@ -103,5 +115,16 @@ const styles = StyleSheet.create({
     margin: 10,
     textAlign: 'left',
     fontWeight: 'bold'
-  } 
+  },
+  score_area: {
+    width: 'auto',
+    flex: 1,
+    flexDirection: 'row',
+    margin: 10
+  },
+  score: {
+    width: '100%',
+    padding: 0,
+    margin: 0
+  }
 });

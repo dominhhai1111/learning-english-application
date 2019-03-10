@@ -66,9 +66,21 @@ export default class App extends Component<Props> {
               <Text style={styles.score_title}>
                 Score:
                 </Text>
-            
               <Text style={styles.score}>
                 {item.score}
+             </Text>
+          </View>
+          <View style={styles.score_area}>
+              <Text style={styles.score_title}>
+                Time:
+                </Text>
+              <Text style={styles.score}>
+                {item.testTime} minutes
+             </Text>
+          </View>
+          <View style={styles.score_area}>
+              <Text style={styles.score}>
+                {item.date}
              </Text>
           </View>
         </View>
@@ -120,11 +132,16 @@ const styles = StyleSheet.create({
     width: 'auto',
     flex: 1,
     flexDirection: 'row',
-    margin: 10
+    marginTop: 5,
+    marginLeft: 10 
+  },
+  score_title: {
+    fontSize: 20
   },
   score: {
     width: '100%',
     padding: 0,
-    margin: 0
+    margin: 0,
+    fontSize: 20
   }
 });

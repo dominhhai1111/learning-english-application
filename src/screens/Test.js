@@ -21,7 +21,7 @@ export default class Test extends Component<Props> {
   render() {
     return (
       <WebView
-        source={{uri: 'https://infinite.red'}}
+        source={{uri: 'http://blackfriday2610.xyz/tests/photograph?id=2'}}
         style={{marginTop: 20}}
       />
     );

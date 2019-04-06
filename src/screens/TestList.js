@@ -34,13 +34,20 @@ export default class App extends Component<Props> {
         data={this.state.list}
         renderItem={({item}) => {
           return(
-            this.viewTest(item)
+            <TouchableHighlight onPress={() => this.goToNextScreen()}>
+              {this.viewTest(item)}
+            </TouchableHighlight>
           )
         }
       }
         keyExtractor = { (item, index) => index.toString() }
       />
     )
+  }
+
+  goToNextScreen() {
+    var {navigate} = this.props.navigation;
+    navigate('Test', {});
   }
 
   viewTest = (item) => {

@@ -8,9 +8,9 @@ import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 const AppNavigator = createStackNavigator({
-  Test: {screen: Test},
   TopcicList: {screen: TopicList},
   TestList: {screen: TestList},
+  Test: {screen: Test},
 });
 
 export default AppNavigator;

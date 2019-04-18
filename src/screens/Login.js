@@ -27,7 +27,7 @@ export default class Login extends Component<Props> {
 
   goToNextScreen() {
     var {navigate} = this.props.navigation;
-    navigate('TopicList', {});
+    navigate('AppWebView', {});
   }
 
   goToRegisterScreen() {
@@ -56,7 +56,6 @@ export default class Login extends Component<Props> {
         console.debug(response);
         if (response.status == 'success') {
             this.goToNextScreen();
-            console.log('next-page');
         }
         // ...
       }).catch(error => {
@@ -74,7 +73,7 @@ export default class Login extends Component<Props> {
           <Text style={styles.logoText}>My Toiec</Text>
             <TextInput placeholder="Email" placeholderColor="#c4c3cb" style={styles.loginFormTextInput} onChangeText={(email) => this.setState({email})}/>
             <TextInput placeholder="Password" placeholderColor="#c4c3cb" style={styles.loginFormTextInput} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
-            <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.props.navigation.navigate('TopicList')}>
+            <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.login()}>
               <Text style={styles.loginText}>Login</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonContainer} onPress={() => this.goToRegisterScreen()}>

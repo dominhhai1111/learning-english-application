@@ -5,7 +5,7 @@
  */
  
 import React, { Component } from 'react';
-import {TouchableHighlight, StyleSheet, Keyboard, Text, View, Button, TextInput, TouchableWithoutFeedback, Alert, KeyboardAvoidingView} from 'react-native';
+import {AsyncStorage, TouchableHighlight, StyleSheet, Keyboard, Text, View, Button, TextInput, TouchableWithoutFeedback, Alert, KeyboardAvoidingView} from 'react-native';
 import {createStackNavigator, createAppContainer } from 'react-navigation';
 type Props = {};
 export default class Login extends Component<Props> {
@@ -15,7 +15,7 @@ export default class Login extends Component<Props> {
 
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       email   : '',
       password: '',
     }
@@ -55,7 +55,8 @@ export default class Login extends Component<Props> {
       .then(response => {
         console.debug(response);
         if (response.status == 'success') {
-            this.goToNextScreen();
+          AsyncStorage.setItem('remember_token', response.remember_token);
+          this.goToNextScreen();
         }
         // ...
       }).catch(error => {

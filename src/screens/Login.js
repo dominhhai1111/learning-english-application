@@ -66,7 +66,7 @@ export default class Login extends Component<Props> {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.containerView} behavior="padding">
+      <KeyboardAvoidingView style={styles.containerView}>
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.loginScreenContainer}>
